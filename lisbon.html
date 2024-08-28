@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>里斯本站抢票倒计时</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #111;
+            color: #fff;
+            margin: 0;
+            text-align: center;
+        }
+        #countdown {
+            font-size: 3em;
+        }
+        #message {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+        #info {
+            margin-top: 30px;
+            font-size: 1.2em;
+        }
+        #address, #pricing, #datetime {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>罗千煜 2025 DARK SECRET WORLD TOUR - 里斯本站</h1>
+        <h2>抢票倒计时</h2>
+        <div id="countdown"></div>
+        <div id="message"></div>
+        
+        <div id="info">
+            <div id="datetime"><strong>演唱会时间:</strong> 2025年5月2日 19:00</div>
+            <div id="address"><strong>举办地址:</strong> Estadio da Luz</div>
+            <div id="pricing">
+                <strong>票价:</strong> EUR 80 - 350 (约合人民币 580 - 2580 元)
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 设置抢票预售时间
+        var preSaleDate = new Date("2024-09-25T10:00:00").getTime();
+
+        // 每秒更新倒计时
+        var countdownFunction = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = preSaleDate - now;
+
+            // 计算剩余的天、小时、分钟和秒
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // 在页面上显示倒计时
+            document.getElementById("countdown").innerHTML = days + "天 " + hours + "小时 "
+            + minutes + "分钟 " + seconds + "秒 ";
+
+            // 如果倒计时结束，显示信息
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById("countdown").innerHTML = "抢票已开始！";
+                document.getElementById("message").innerHTML = "快点击购票链接！";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
